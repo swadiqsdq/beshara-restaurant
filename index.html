@@ -6,34 +6,77 @@
 <title>Social Media Links</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="index.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="turn.min.js"></script>
+<script src="script.js"></script>
 </head>
 <body>
+    <div class="preloader">
+        <img  class="spinning-image" src="logo.png" width="180px" height="240px" alt="Loading..." />
+    </div>
+        
     <div class="page-container">
-            <div class="company-info">
-                <img src="logo.png" alt="Company Logo" class="company-logo">
-                <h1 class="company-name">مطعم بشارة Beshara Restaurant</h1>
-            </div>
-		<h1 class="follow-us">Follow us</h1>
+        <div class="company-info">
+            <img src="logo.png" alt="Company Logo" class="company-logo">
+            <h1 class="company-name">مطعم بشارة <br>Beshara Restaurant</h1>
+        </div>
+        <h2 class="menu">Menu</h2>
+        <div id="book">
+            <div class="cover"><img class="clsImg" src="menu1.jpeg" alt="Cover Page"></div>
+        </div>
+        <h1 class="follow-us">Follow us</h1>
         <section class="social-media-section">
-			
             <div class="social-buttons">
-				<a href="https://www.instagram.com/invites/contact/?i=8af6yw0xnjp7&utm_content=twxnd7w" class="social-button social-button--instagram" aria-label="Instagram">
+                <a href="https://www.instagram.com/invites/contact/?i=8af6yw0xnjp7&utm_content=twxnd7w" class="social-button social-button--instagram" aria-label="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61556918408972" class="social-button social-button--facebook" aria-label="Facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-				<a href="www.beshararestaurant.com" class="social-button social-button--Website" aria-label="Website">
+                <a href="www.beshararestaurant.com" class="social-button social-button--Website" aria-label="Website">
                     <i class="fas fa-globe"></i>
                 </a>
                 <a href="#" class="social-button social-button--snapchat" aria-label="Snapchat">
                     <i class="fab fa-snapchat-ghost"></i>
                 </a>
-				<a href="#" class="social-button social-button--linkedin" aria-label="tiktok">
+                <a href="#" class="social-button social-button--linkedin" aria-label="tiktok">
                     <i class="fab fa-tiktok"></i>
                 </a>
             </div>
         </section>
     </div>
+    
+    <script type="text/javascript">
+        var numberOfPages = 5;
+    
+        function addPage(page, book) {
+            if (!book.turn('hasPage', page)) {
+                var element = $('<div />', {'class': 'page '+((page%2==0) ? 'odd' : 'even'), 'id': 'page-'+page}).html('<i class="loader"></i>');
+                book.turn('addPage', element, page);
+                setTimeout(function(){
+                    element.html('<img class="clsImg" src="menu'+page+'.jpeg" alt="Page '+page+'">');
+                }, 1000);
+            }
+        }
+    
+        $(window).ready(function(){
+            $('#book').turn({acceleration: true,
+                            pages: numberOfPages,
+                            elevation: 50,
+                            gradients: !$.isTouch,
+                            when: {
+                                turning: function(e, page, view) {
+                                    var range = $(this).turn('range', page);
+                                    for (page = range[0]; page<=range[1]; page++)
+                                        addPage(page, $(this));
+                                },
+                                turned: function(e, page) {
+                                    $('#page-number').val(page);
+                                }
+                            }
+                        });
+        });    
+    </script>
 </body>
 </html>
+ 
