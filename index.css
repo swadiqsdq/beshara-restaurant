@@ -337,3 +337,21 @@ body {
 .spinning-image {
   animation: spin .7s linear infinite;
 }
+
+footer {
+  color: white; /* Set text color */
+  padding: 10px 0; /* Add padding */
+  text-align: center; /* Center align text */
+  opacity: 50%;
+}
+
+footer a {
+  color: orange; /* Set link color */
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  footer {
+      font-size: 14px; /* Decrease font size for smaller screens */
+  }
+}
