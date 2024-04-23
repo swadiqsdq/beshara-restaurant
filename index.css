@@ -353,5 +353,12 @@ footer a {
 @media (max-width: 768px) {
   footer {
       font-size: 14px; /* Decrease font size for smaller screens */
+      text-align: center; /* Center align text */
+      color: white; /* Set text color */
+      opacity: 50%;
   }
+ footer a {
+  color: orange; /* Set link color */
+  text-decoration: none;
+ }
 }
